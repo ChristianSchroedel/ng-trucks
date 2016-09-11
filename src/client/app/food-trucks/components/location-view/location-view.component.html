@@ -1,0 +1,4 @@
+<div *ngIf="truckEvents">
+  <h3 (click)="location.back()">{{truckEvents.locationName}}</h3>
+  <truck-location [truckEvents]="truckEvents.events"></truck-location>
+</div>

@@ -1,0 +1,19 @@
+truck-tour {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  background: rgb(245, 245, 245);
+  box-shadow: 5px 5px 2px 0 rgba(0, 0, 0, .75);
+
+  .event-metadata {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-around;
+    margin: 10px;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}

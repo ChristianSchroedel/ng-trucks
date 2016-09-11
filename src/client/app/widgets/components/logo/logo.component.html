@@ -1,0 +1,4 @@
+<a *ngIf="urlLink" href="{{urlLink}}" target="_blank">
+  <img src="{{urlLogo}}" alt="{{title}}" title="{{title}}"/>
+</a>
+<img *ngIf="!urlLink" src="{{urlLogo}}" alt="{{title}}" title="{{title}}"/>
