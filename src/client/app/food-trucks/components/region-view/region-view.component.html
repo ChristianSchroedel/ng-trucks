@@ -1,5 +1,6 @@
 <h3>Truck-Region - {{regionName}}</h3>
 <div *ngFor="let truckEvents of truckEventsList">
   <h3 (click)="goToLocation(truckEvents)">{{truckEvents.locationName}}</h3>
-  <truck-location [truckEvents]="truckEvents.events"></truck-location>
+  <truck-location [truckEvents]="truckEvents.events"
+                  (operatorClicked)="showTruckOperator($event)"></truck-location>
 </div>

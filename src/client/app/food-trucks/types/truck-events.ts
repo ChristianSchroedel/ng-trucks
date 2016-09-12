@@ -16,6 +16,8 @@ export class TruckEvent {
   vendorUrl: string;
   vendorOffer: string;
 
+  operatorId: string;
+
   date: string;
   weekDay: string;
   startTime: string;
@@ -38,6 +40,8 @@ export class TruckEvent {
     this.vendorLogo = operator.logo;
     this.vendorUrl = operator.name_url || operator.url || '';
     this.vendorOffer = operator.offer;
+
+    this.operatorId = operator.id;
   }
 
   private extractDateTime(tour: Tour) {

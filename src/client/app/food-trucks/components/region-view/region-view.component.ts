@@ -43,8 +43,7 @@ export class RegionViewComponent implements OnInit, OnDestroy {
       this.store.select(appState => appState.loadedEvents),
       (params: any, loadedEvents: LoadedEventsState) => {
         return {params, loadedEvents};
-      }
-    );
+      });
 
     this.sub = combined.subscribe((combined: any) => {
       let params: any = combined.params;
@@ -76,6 +75,10 @@ export class RegionViewComponent implements OnInit, OnDestroy {
     };
 
     this.router.navigate(['/location', events.locationName], navExtras);
+  }
+
+  showTruckOperator(operatorId: string) {
+    this.router.navigate(['/truck', operatorId]);
   }
 
   private loadNextLocation = (loadedLocations: string[]) => {

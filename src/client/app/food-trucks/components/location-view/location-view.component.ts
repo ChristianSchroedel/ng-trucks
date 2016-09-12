@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -26,6 +26,7 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
+              private router: Router,
               private route: ActivatedRoute,
               private location: Location) {
   }
@@ -69,5 +70,9 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  showTruckOperator(operatorId: string) {
+    this.router.navigate(['/truck', operatorId]);
   }
 }

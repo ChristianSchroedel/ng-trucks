@@ -7,7 +7,7 @@ import {WidgetsModule} from '../widgets/widgets.module';
 import {truckRouting} from './food-trucks.routes';
 import {TruckTourComponent} from './components/tour/truck-tour.component';
 import {TruckLocationComponent} from './components/location/truck-location.component';
-import {TruckDetailViewComponent} from './components/detail-view/truck-detail-view.component';
+import {TruckViewComponent} from './components/truck-view/truck-view.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
 import {RegionViewComponent} from './components/region-view/region-view.component';
 import {FoodTruckService} from './services/foodtruck.service';
@@ -19,7 +19,7 @@ import {LoadedOperatorsActions} from './actions/loaded-operators';
   declarations: [
     TruckTourComponent,
     TruckLocationComponent,
-    TruckDetailViewComponent,
+    TruckViewComponent,
     LocationViewComponent,
     RegionViewComponent
   ],

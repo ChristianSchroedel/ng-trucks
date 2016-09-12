@@ -1,7 +1,7 @@
 /**
  * Created by Christian Schrödel on 07.09.2016.
  */
-import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 import {TruckEvent} from '../../types/truck-events';
 
 @Component({
@@ -14,4 +14,5 @@ import {TruckEvent} from '../../types/truck-events';
 })
 export class TruckLocationComponent {
   @Input() truckEvents: TruckEvent[];
+  @Output() operatorClicked: EventEmitter<string> = new EventEmitter<string>();
 }
