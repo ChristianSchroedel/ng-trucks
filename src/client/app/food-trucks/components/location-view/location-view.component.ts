@@ -1,7 +1,7 @@
 /**
  * Created by Christian Schrödel on 10.09.2016.
  */
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
@@ -16,7 +16,8 @@ import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
 @Component({
   moduleId: module.id,
   selector: 'location-view',
-  templateUrl: 'location-view.component.html'
+  templateUrl: 'location-view.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class LocationViewComponent implements OnInit, OnDestroy {
   private truckEvents: TruckEvents;

@@ -1,9 +1,12 @@
+@import '../../../../assets/css/palette';
+@import '../../../../assets/css/containers';
+
 truck-tour {
   display: flex;
   align-items: center;
-  margin: 15px;
-  background: rgb(245, 245, 245);
-  box-shadow: 5px 5px 2px 0 rgba(0, 0, 0, .75);
+  margin: 4px 0;
+  background: $color2;
+  @include box-shadow;
 
   .event-metadata {
     display: flex;

@@ -1,2 +1,4 @@
 <truck-tour *ngFor="let event of truckEvents" [event]="event"></truck-tour>
-<p *ngIf="!truckEvents.length">Zur Zeit keine Food-Trucks ... :-(</p>
+<div *ngIf="!truckEvents.length" class="no-events">
+  <p>Zur Zeit keine Food-Trucks ... :-(</p>
+</div>

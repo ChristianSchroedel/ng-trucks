@@ -1,0 +1,12 @@
+@import '../../../../assets/css/palette';
+@import '../../../../assets/css/containers';
+
+truck-location {
+  .no-events {
+    text-align: center;
+    padding: 10px;
+    margin: 4px 0;
+    background: $color2;
+    @include box-shadow;
+  }
+}

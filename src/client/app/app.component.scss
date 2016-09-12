@@ -1,0 +1,19 @@
+@import '../assets/css/palette';
+@import '../assets/css/containers';
+
+app {
+  header {
+    padding: 5px;
+    background: $color3;
+    @include box-shadow;
+
+    h1 {
+      padding: 5px;
+      color: $color2;
+    }
+  }
+
+  article {
+    padding: 10px;
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Created by Christian Schrödel on 07.09.2016.
  */
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
@@ -19,7 +19,8 @@ import {TruckLocation} from '../../types/truck-locations';
 @Component({
   moduleId: module.id,
   selector: 'region-view',
-  templateUrl: 'region-view.component.html'
+  templateUrl: 'region-view.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class RegionViewComponent implements OnInit, OnDestroy {
   private regionName: string;
