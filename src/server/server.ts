@@ -6,7 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as request from 'request';
 
 const PORT: number = 5555;
-const CLIENT_DIR: string = '../client';
+const CLIENT_DIR: string = path.resolve(__dirname, '../client');
 
 const FOOD_TRUCKS_API_URL: string = 'https://www.food-trucks-deutschland.de/api/locations/getTours.json';
 
@@ -22,8 +22,10 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 
 app.use(bodyParser.json());
 
-app.get('*', (req, res) => res.sendFile(path.join(CLIENT_DIR, 'index.html')));
-app.use('/', express.static(path.resolve(__dirname, CLIENT_DIR)));
+app.use('/', express.static(CLIENT_DIR));
+app.get('*', (req: express.Request, res: express.Response) => {
+  return res.sendFile(path.join(CLIENT_DIR, 'index.html'));
+});
 
 app.post('/api/food-trucks', parseUrlEncoded, (req: any, res: express.Response) => {
   let body: any = req.body;
