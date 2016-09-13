@@ -17,12 +17,19 @@ const initialState: LoadedEventsState = {
 
 export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: LoadedEventsState = initialState, action: Action) => {
   switch (action.type) {
-    case LoadedEventsActions.LOAD_LOCATION_DONE:
-      let loadEvents: TruckEvents = action.payload;
+    case LoadedEventsActions.LOAD_LOCATION:
+      let location: string = action.payload;
 
-      if (state.loadedLocations.includes(loadEvents.locationName)) {
+      if (state.loadedLocations.includes(location)) {
         return state;
       }
+
+      return {
+        loadedLocations: [...state.loadedLocations, location],
+        events: state.events.slice()
+      };
+    case LoadedEventsActions.LOAD_LOCATION_DONE:
+      let loadEvents: TruckEvents = action.payload;
 
       return {
         loadedLocations: [...state.loadedLocations, loadEvents.locationName],

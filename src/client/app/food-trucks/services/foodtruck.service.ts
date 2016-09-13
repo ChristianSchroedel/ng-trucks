@@ -4,6 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Store} from '@ngrx/store';
+import 'rxjs/add/operator/take';
 import {TruckEvent} from '../types/truck-events';
 import {TruckQuery} from '../types/truck-queries';
 import {TruckLocation} from '../types/truck-locations';
@@ -84,6 +85,8 @@ export class FoodTruckService {
   }
 
   private requestFoodTrucks(requestBody: TruckQuery, locationName?: string) {
+    this.store.dispatch(this.eventsActions.loadLocation(locationName));
+
     this.http.post(FOODTRUCK_API_URL, JSON.stringify(requestBody), this.requestOptions)
       .map((res: Response) => res.json())
       .map((trucklist: TruckList) => {
@@ -106,6 +109,6 @@ export class FoodTruckService {
         );
 
         this.store.dispatch(this.operatorActions.loadOperatorsDone(operators));
-      }).subscribe();
+      }).take(1).subscribe();
   }
 }

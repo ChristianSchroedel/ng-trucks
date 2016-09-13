@@ -9,7 +9,7 @@ import {TruckEvents} from '../types/truck-events';
 @Injectable()
 export class LoadedEventsActions {
   static LOAD_LOCATION = 'LOAD_LOCATION';
-  loadLocation(location: TruckLocation): Action {
+  loadLocation(location: string): Action {
     return {
       type: LoadedEventsActions.LOAD_LOCATION,
       payload: location
