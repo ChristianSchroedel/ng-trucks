@@ -1,5 +1,2 @@
 <h3 (click)="location.back()">Truck-Details</h3>
-<div *ngIf="truck">
-  <logo [urlLogo]="truck.logo" [title]="truck.name"></logo>
-  <p>{{truck.description}}</p>
-</div>
+<truck *ngIf="truck" [operator]="truck"></truck>

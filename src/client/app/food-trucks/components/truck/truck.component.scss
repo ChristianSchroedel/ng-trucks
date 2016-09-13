@@ -1,0 +1,42 @@
+@import '../../../../assets/css/containers';
+
+truck {
+  logo {
+    img {
+      width: 200px;
+      height: 150px;
+    }
+  }
+
+  .operator-info {
+    display: flex;
+    justify-content: center;
+
+    .operator-shortinfo,
+    .operator-description {
+      padding: 10px;
+    }
+
+    .operator-shortinfo {
+      @include card;
+      text-align: center;
+      margin-right: 5px;
+    }
+  }
+
+  .operator-impressions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .operator-impression {
+      @include card;
+      margin-right: 5px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}

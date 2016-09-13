@@ -3,10 +3,8 @@
 
 truck-location {
   .no-events {
+    @include card;
     text-align: center;
     padding: 10px;
-    margin: 4px 0;
-    background: $color2;
-    @include box-shadow;
   }
 }

@@ -1,12 +1,8 @@
-@import '../../../../assets/css/palette';
 @import '../../../../assets/css/containers';
 
 truck-tour {
+  @include card;
   display: flex;
-  align-items: center;
-  margin: 4px 0;
-  background: $color2;
-  @include box-shadow;
 
   .event-metadata {
     display: flex;
