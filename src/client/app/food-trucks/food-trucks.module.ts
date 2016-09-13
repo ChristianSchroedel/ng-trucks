@@ -7,22 +7,29 @@ import {WidgetsModule} from '../widgets/widgets.module';
 import {truckRouting} from './food-trucks.routes';
 import {TruckTourComponent} from './components/tour/truck-tour.component';
 import {TruckLocationComponent} from './components/location/truck-location.component';
-import {TruckDetailViewComponent} from './components/detail-view/truck-detail-view.component';
+import {TruckComponent} from './components/truck/truck.component';
+import {TruckViewComponent} from './components/truck-view/truck-view.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
 import {RegionViewComponent} from './components/region-view/region-view.component';
 import {FoodTruckService} from './services/foodtruck.service';
-import {LoadedTrucksActions} from './actions/loaded-trucks';
+import {LoadedEventsActions} from './actions/loaded-events';
+import {LoadedOperatorsActions} from './actions/loaded-operators';
 
 @NgModule({
   imports: [CommonModule, WidgetsModule, truckRouting],
   declarations: [
     TruckTourComponent,
     TruckLocationComponent,
-    TruckDetailViewComponent,
+    TruckComponent,
+    TruckViewComponent,
     LocationViewComponent,
     RegionViewComponent
   ],
-  providers: [FoodTruckService, LoadedTrucksActions]
+  providers: [
+    FoodTruckService,
+    LoadedEventsActions,
+    LoadedOperatorsActions
+  ]
 })
 export class FoodTrucksModule {
 }

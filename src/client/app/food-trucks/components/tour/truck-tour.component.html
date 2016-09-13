@@ -1,7 +1,7 @@
-<logo [urlLink]="event.vendorUrl"
-      [urlLogo]="event.vendorLogo"
-      [title]="event.vendorName"></logo>
-<div class="event-metadata">
+<logo [urlLogo]="event.vendorLogo"
+      [title]="event.vendorName"
+      (clicked)="operatorClicked.emit(event.operatorId)"></logo>
+<div class="event-metadata" (click)="locationClicked.emit()">
   <p>{{event.weekDay}} <strong>{{event.startTime}} bis {{event.endTime}}</strong></p>
   <p><strong>{{event.vendorName}}</strong>, {{event.vendorOffer}}</p>
   <p>{{event.date}} - {{event.streetName}} {{event.streetNumber}}, {{event.zipCode}} {{event.cityName}}</p>

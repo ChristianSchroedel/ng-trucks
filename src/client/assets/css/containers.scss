@@ -3,3 +3,11 @@
 @mixin box-shadow {
   box-shadow: 0 1px 2px 0 $color4;
 }
+
+@mixin card {
+  align-items: center;
+  margin: 4px 0;
+  padding: 5px;
+  background: $color2;
+  @include box-shadow;
+}

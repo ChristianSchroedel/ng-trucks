@@ -9,6 +9,7 @@ import {appRoutingProviders, routing} from './app.routes';
 import {MainComponent} from './app.component';
 import {FoodTrucksModule} from './food-trucks/food-trucks.module';
 import {loadedEventsReducer} from './food-trucks/reducers/loaded-events.reducer';
+import {loadedOperatorsReducer} from './food-trucks/reducers/loaded-operators.reducer';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {loadedEventsReducer} from './food-trucks/reducers/loaded-events.reducer'
     HttpModule,
     routing,
     StoreModule.provideStore({
-      loadedEvents: loadedEventsReducer
+      loadedEvents: loadedEventsReducer,
+      loadedOperators: loadedOperatorsReducer
     }),
     FoodTrucksModule
   ],

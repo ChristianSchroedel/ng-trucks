@@ -1,4 +1,5 @@
 <div *ngIf="truckEvents">
   <h3 (click)="location.back()">{{truckEvents.locationName}}</h3>
-  <truck-location [truckEvents]="truckEvents.events"></truck-location>
+  <truck-location [truckEvents]="truckEvents.events"
+                  (operatorClicked)="showTruckOperator($event)"></truck-location>
 </div>

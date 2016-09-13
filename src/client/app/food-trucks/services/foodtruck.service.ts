@@ -8,7 +8,8 @@ import {TruckEvent} from '../types/truck-events';
 import {TruckQuery} from '../types/truck-queries';
 import {TruckLocation} from '../types/truck-locations';
 import {AppState} from '../../app.state';
-import {LoadedTrucksActions} from '../actions/loaded-trucks';
+import {LoadedEventsActions} from '../actions/loaded-events';
+import {LoadedOperatorsActions} from '../actions/loaded-operators';
 
 const FOODTRUCK_API_URL: string = 'http://localhost:5555/api/food-trucks';
 
@@ -68,7 +69,10 @@ export interface Colors {
 export class FoodTruckService {
   private requestOptions: RequestOptions;
 
-  constructor(private http: Http, private store: Store<AppState>, private actions: LoadedTrucksActions) {
+  constructor(private http: Http,
+              private store: Store<AppState>,
+              private eventsActions: LoadedEventsActions,
+              private operatorActions: LoadedOperatorsActions) {
     let headers: Headers = new Headers({'Content-Type': 'application/json'});
 
     this.requestOptions = new RequestOptions({headers: headers});
@@ -93,13 +97,15 @@ export class FoodTruckService {
         });
 
         this.store.dispatch(
-          this.actions.loadLocationDone({
+          this.eventsActions.loadLocationDone({
             locationName: locationName || `${requestBody.longitude}, ${requestBody.longitude}`,
             latitude: requestBody.latitude,
             longitude: requestBody.longitude,
             events: truckEvents
           })
         );
+
+        this.store.dispatch(this.operatorActions.loadOperatorsDone(operators));
       }).subscribe();
   }
 }
