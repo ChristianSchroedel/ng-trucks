@@ -4,21 +4,30 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 body {
   margin: auto auto;
-  max-width: 700px;
+  max-width: 900px;
 
-  color: $color4;
-  background: $color1;
+  color: $font-color-dark;
+  background: $color-bg-body;
 }
 
-h3 {
-  display: inline-block;
-  padding: 5px 20px;
-  margin: 10px 0 1px 0;
-  color: $color2;
-  background: $color5;
-  @include box-shadow;
+hr {
+  margin: 20px;
+}
+
+h1 {
+  padding: 5px;
+}
+
+h2 {
+  padding: 5px;
+}
+
+h4 {
+  padding: 20px;
+  text-align: center;
 }

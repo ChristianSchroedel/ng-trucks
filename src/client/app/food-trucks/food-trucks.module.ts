@@ -5,10 +5,13 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WidgetsModule} from '../widgets/widgets.module';
 import {truckRouting} from './food-trucks.routes';
-import {TruckTourComponent} from './components/tour/truck-tour.component';
-import {TruckLocationComponent} from './components/location/truck-location.component';
-import {TruckComponent} from './components/truck/truck.component';
+import {TourComponent} from './components/push/tour/tour.component';
+import {TourOverviewComponent} from './components/push/tour-overview/tour-overview.component';
+import {TruckComponent} from './components/push/truck/truck.component';
+import {TruckOverviewComponent} from './components/push/truck-overview/truck-overview.component';
 import {TruckViewComponent} from './components/truck-view/truck-view.component';
+import {LocationOverviewComponent} from './components/push/location-overview/location-overview.component';
+import {LocationComponent} from './components/push/location/location.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
 import {RegionViewComponent} from './components/region-view/region-view.component';
 import {FoodTruckService} from './services/foodtruck.service';
@@ -18,9 +21,12 @@ import {LoadedOperatorsActions} from './actions/loaded-operators';
 @NgModule({
   imports: [CommonModule, WidgetsModule, truckRouting],
   declarations: [
-    TruckTourComponent,
-    TruckLocationComponent,
+    TourComponent,
+    TourOverviewComponent,
     TruckComponent,
+    TruckOverviewComponent,
+    LocationComponent,
+    LocationOverviewComponent,
     TruckViewComponent,
     LocationViewComponent,
     RegionViewComponent

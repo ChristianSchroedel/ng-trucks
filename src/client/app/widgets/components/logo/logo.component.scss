@@ -1,6 +1,15 @@
 logo {
+  display: flex;
+  justify-content: center;
+  max-width: 162px;
+  min-height: 162px;
+
   img {
-    height: 75px;
-    width: 100px;
+    width: 150px;
+    height: 112px;
+  }
+
+  p {
+    text-align: center;
   }
 }

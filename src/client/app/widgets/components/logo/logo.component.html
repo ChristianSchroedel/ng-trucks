@@ -1,1 +1,5 @@
-<img (click)="clicked.emit()" [src]="urlLogo" alt="{{title}}" title="{{title}}"/>
+<div (click)="clicked.emit()">
+  <img [src]="urlLogo" alt="{{title}}" title="{{title}}"/>
+  <p><strong>{{title}}</strong></p>
+  <p><small>{{subTitle}}</small></p>
+</div>

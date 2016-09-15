@@ -10,6 +10,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import {AppState} from '../../../app.state';
 import {Operator} from '../../services/foodtruck.service';
+import {SCREEN} from '../../../reducers/screen.reducer';
+import {ScreenActions} from '../../../actions/screen';
 
 @Component({
   moduleId: module.id,
@@ -22,6 +24,7 @@ export class TruckViewComponent implements OnInit, OnDestroy {
   private truck: Operator;
 
   constructor(private store: Store<AppState>,
+              private screenActions: ScreenActions,
               private route: ActivatedRoute,
               private location: Location) {
   }
@@ -41,6 +44,11 @@ export class TruckViewComponent implements OnInit, OnDestroy {
       let operatorId: string = params.operatorId;
 
       this.truck = operators.find((op: Operator) => op.id === operatorId);
+
+      this.store.dispatch(this.screenActions.setCurrentScreen({
+        screen: SCREEN.TRUCK_VIEW,
+        title: this.truck.nameShort || this.truck.name
+      }));
     });
   }
 

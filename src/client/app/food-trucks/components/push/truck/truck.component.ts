@@ -3,7 +3,7 @@
  */
 
 import {Component, Input, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
-import {Operator} from '../../services/foodtruck.service';
+import {Operator} from '../../../services/foodtruck.service';
 
 @Component({
   moduleId: module.id,

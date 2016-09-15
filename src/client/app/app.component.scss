@@ -4,16 +4,41 @@
 app {
   header {
     padding: 5px;
-    background: $color3;
-    @include box-shadow;
-
-    h1 {
-      padding: 5px;
-      color: $color2;
-    }
+    color: $font-color-bright;
+    background: $color-bg-header;
   }
 
   article {
     padding: 10px;
+  }
+
+  footer {
+    padding: 5px;
+    color: $font-color-bright;
+    background: $color-bg-footer;
+    text-align: center;
+
+    ul, h5 {
+      margin: 10px;
+    }
+
+    ul {
+      text-align: center;
+
+      li {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      li:nth-child(n+2)::before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 20px;
+        background: $font-color-bright;
+        margin: 0 5px;
+        vertical-align: text-bottom;
+      }
+    }
   }
 }

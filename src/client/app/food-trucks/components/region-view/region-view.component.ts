@@ -1,7 +1,7 @@
 /**
  * Created by Christian Schrödel on 07.09.2016.
  */
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
@@ -9,59 +9,62 @@ import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/combineLatest';
-import {TruckEvents} from '../../types/truck-events';
-import {REGION_NUREMBERG, Region, getRegion} from '../../types/truck-regions';
-import {FoodTruckService} from '../../services/foodtruck.service';
+import {Region, getRegion} from '../../types/truck-regions';
+import {FoodTruckService, Operator} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
 import {TruckLocation} from '../../types/truck-locations';
+import {TruckEvents, TruckEvent} from '../../types/truck-events';
+import {ScreenActions} from '../../../actions/screen';
+import {SCREEN} from '../../../reducers/screen.reducer';
 
 @Component({
   moduleId: module.id,
   selector: 'region-view',
-  templateUrl: 'region-view.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: 'region-view.component.html'
 })
 export class RegionViewComponent implements OnInit, OnDestroy {
   private regionName: string;
   private region: Region;
-  private truckEventsList: TruckEvents[];
+  private operators: Operator[];
 
   private sub: Subscription;
 
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
               private router: Router,
-              private route: ActivatedRoute) {
-    this.region = REGION_NUREMBERG;
-    this.truckEventsList = [];
+              private route: ActivatedRoute,
+              private screenActions: ScreenActions) {
+    this.operators = [];
   }
 
   ngOnInit() {
     let combined: Observable<any> = Observable.combineLatest(
       this.route.params,
       this.store.select(appState => appState.loadedEvents),
-      (params: any, loadedEvents: LoadedEventsState) => {
-        return {params, loadedEvents};
+      this.store.select(appState => appState.loadedOperators),
+      (params: any, loadedEvents: LoadedEventsState, loadedOperators: Operator[]) => {
+        return {params, loadedEvents, loadedOperators};
       });
 
     this.sub = combined.subscribe((combined: any) => {
       let params: any = combined.params;
       let loadedEvents: LoadedEventsState = combined.loadedEvents;
+      let loadedOperators: Operator[] = combined.loadedOperators;
 
       this.region = getRegion(params.regionName);
       this.regionName = this.region.name;
 
+      this.store.dispatch(this.screenActions.setCurrentScreen({
+        screen: SCREEN.REGION_VIEW,
+        title: this.regionName
+      }));
+
+      // Preload locations for this region
       this.loadNextLocation(loadedEvents.loadedLocations);
 
-      this.truckEventsList = loadedEvents.events.map((truckEvents: TruckEvents) => {
-        return {
-          locationName: truckEvents.locationName,
-          longitude: truckEvents.longitude,
-          latitude: truckEvents.latitude,
-          events: truckEvents.events.slice(0, 1)
-        }
-      });
+      // Extract available Operators for this region
+      this.extractOperatorsForRegion(loadedOperators, loadedEvents.events);
     });
   }
 
@@ -69,16 +72,18 @@ export class RegionViewComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  goToLocation(events: TruckEvents) {
+  goToLocation(location: TruckLocation) {
+    let geoLocation = location.geoLocation;
+
     let navExtras: NavigationExtras = {
-      queryParams: {longitude: events.longitude, latitude: events.latitude}
+      queryParams: {longitude: geoLocation.longitude, latitude: geoLocation.latitude}
     };
 
-    this.router.navigate(['/location', events.locationName], navExtras);
+    this.router.navigate(['/location', location.name], navExtras);
   }
 
-  showTruckOperator(operatorId: string) {
-    this.router.navigate(['/truck', operatorId]);
+  goToTruck(operator: Operator) {
+    this.router.navigate(['/truck', operator.id]);
   }
 
   private loadNextLocation = (loadedLocations: string[]) => {
@@ -90,4 +95,22 @@ export class RegionViewComponent implements OnInit, OnDestroy {
       this.foodTruckService.loadTruckListForLocation(location);
     }
   };
+
+  private extractOperatorsForRegion(operators: Operator[], loadedLocations: TruckEvents[]) {
+    let locationNamesForRegion: string[] = this.region.truckLocations.map((location: TruckLocation) => location.name);
+
+    let loadedEventsForRegion: TruckEvents[] = loadedLocations.filter((events: TruckEvents) => {
+      return locationNamesForRegion.includes(events.locationName)
+    });
+
+    let operatorIdsForRegion: string[] = [];
+
+    loadedEventsForRegion.forEach((location: TruckEvents) => {
+      operatorIdsForRegion = operatorIdsForRegion.concat(location.events.map((event: TruckEvent) => event.operatorId))
+    });
+
+    this.operators = operators.filter((operator: Operator) => {
+      return operatorIdsForRegion.includes(operator.id);
+    });
+  }
 }

@@ -1,0 +1,9 @@
+<logo [urlLogo]="event.vendorLogo"
+      [title]="event.vendorName"
+      [subTitle]="event.vendorOffer"
+      (clicked)="operatorClicked.emit(event.operatorId)"></logo>
+<div class="event-metadata" (click)="locationClicked.emit()">
+  <p>{{event.date}}</p>
+  <p><strong>{{event.startTime}} bis {{event.endTime}} Uhr</strong></p>
+  <p>{{event.streetName}} {{event.streetNumber}}, {{event.zipCode}} {{event.cityName}}</p>
+</div>

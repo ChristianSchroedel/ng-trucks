@@ -14,5 +14,6 @@ import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, Ev
 export class LogoComponent {
   @Input() urlLogo: string;
   @Input() title: string;
+  @Input() subTitle: string;
   @Output() clicked: EventEmitter<any> = new EventEmitter<any>();
 }

@@ -1,11 +1,11 @@
 <div class="operator-info">
-  <div class="operator-shortinfo">
-    <logo [urlLogo]="operator.logo" [title]="operator.name"></logo>
-    <p><strong>{{operator.name}}</strong></p>
-    <p>{{operator.offer}}</p>
-  </div>
+  <logo [urlLogo]="operator.logo"
+        [title]="operator.nameShort || operator.name"
+        [subTitle]="operator.offer"></logo>
   <p class="operator-description">{{operator.description}}</p>
 </div>
+<hr>
+<h4>Impressionen von "{{operator.name}}"</h4>
 <div class="operator-impressions">
   <div *ngFor="let impression of operator.impressions" class="operator-impression">
     <img [src]="impression" alt="Impression">
