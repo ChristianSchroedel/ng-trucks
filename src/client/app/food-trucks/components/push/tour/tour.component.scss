@@ -1,0 +1,36 @@
+@import '../../../../../assets/css/containers';
+
+tour {
+  @include card;
+  display: flex;
+
+  logo::after {
+    content: '';
+    display: inline-block;
+    min-width: 2px;
+    height: 120px;
+    margin: 5px;
+    background: $color-bg-button;
+    align-self: center;
+  }
+
+  @include respond-to(max-width, 350px) {
+    logo {
+      max-width: 132px;
+      min-height: 132px;
+
+      img {
+        width: 100px;
+        height: 75px;
+      }
+    }
+  }
+
+  .event-metadata {
+    margin: 10px;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}

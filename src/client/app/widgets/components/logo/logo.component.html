@@ -1,4 +1,5 @@
-<a *ngIf="urlLink" href="{{urlLink}}" target="_blank">
-  <img src="{{urlLogo}}" alt="{{title}}" title="{{title}}"/>
-</a>
-<img *ngIf="!urlLink" src="{{urlLogo}}" alt="{{title}}" title="{{title}}"/>
+<div (click)="clicked.emit()">
+  <img [src]="urlLogo" alt="{{title}}" title="{{title}}"/>
+  <p><strong>{{title}}</strong></p>
+  <p><small>{{subTitle}}</small></p>
+</div>

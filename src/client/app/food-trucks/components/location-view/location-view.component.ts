@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -12,6 +12,8 @@ import {TruckEvents} from '../../types/truck-events';
 import {FoodTruckService} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
+import {SCREEN} from '../../../reducers/screen.reducer';
+import {ScreenActions} from '../../../actions/screen';
 
 @Component({
   moduleId: module.id,
@@ -25,6 +27,8 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
+              private screenActions: ScreenActions,
+              private router: Router,
               private route: ActivatedRoute,
               private location: Location) {
   }
@@ -49,12 +53,17 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
       console.log(`show location: ${locationName}`);
 
+      this.store.dispatch(this.screenActions.setCurrentScreen({
+        screen: SCREEN.LOCATION_VIEW,
+        title: locationName
+      }));
+
       if (!loadedEvents.loadedLocations.includes(locationName)) {
         this.foodTruckService.loadTruckListForLocation({
           name: locationName,
           geoLocation: {
-            longitude: longitude,
-            latitude: latitude
+            latitude: latitude,
+            longitude: longitude
           }
         });
         return;
@@ -68,5 +77,9 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  showTruckOperator(operatorId: string) {
+    this.router.navigate(['/truck', operatorId]);
   }
 }

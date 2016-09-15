@@ -7,11 +7,11 @@ import {TruckLocation} from '../types/truck-locations';
 import {TruckEvents} from '../types/truck-events';
 
 @Injectable()
-export class LoadedTrucksActions {
+export class LoadedEventsActions {
   static LOAD_LOCATION = 'LOAD_LOCATION';
-  loadLocation(location: TruckLocation): Action {
+  loadLocation(location: string): Action {
     return {
-      type: LoadedTrucksActions.LOAD_LOCATION,
+      type: LoadedEventsActions.LOAD_LOCATION,
       payload: location
     };
   }
@@ -19,7 +19,7 @@ export class LoadedTrucksActions {
   static LOAD_LOCATION_DONE = 'LOAD_LOCATION_DONE';
   loadLocationDone(events: TruckEvents): Action {
     return {
-      type: LoadedTrucksActions.LOAD_LOCATION_DONE,
+      type: LoadedEventsActions.LOAD_LOCATION_DONE,
       payload: events
     };
   }

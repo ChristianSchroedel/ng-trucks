@@ -3,7 +3,7 @@
  */
 import {ActionReducer, Action} from '@ngrx/store';
 import {TruckEvents} from '../types/truck-events';
-import {LoadedTrucksActions} from '../actions/loaded-trucks';
+import {LoadedEventsActions} from '../actions/loaded-events';
 
 export interface LoadedEventsState {
   loadedLocations: string[];
@@ -17,12 +17,19 @@ const initialState: LoadedEventsState = {
 
 export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: LoadedEventsState = initialState, action: Action) => {
   switch (action.type) {
-    case LoadedTrucksActions.LOAD_LOCATION_DONE:
-      let loadEvents: TruckEvents = action.payload;
+    case LoadedEventsActions.LOAD_LOCATION:
+      let location: string = action.payload;
 
-      if (state.loadedLocations.includes(loadEvents.locationName)) {
+      if (state.loadedLocations.includes(location)) {
         return state;
       }
+
+      return {
+        loadedLocations: [...state.loadedLocations, location],
+        events: state.events.slice()
+      };
+    case LoadedEventsActions.LOAD_LOCATION_DONE:
+      let loadEvents: TruckEvents = action.payload;
 
       return {
         loadedLocations: [...state.loadedLocations, loadEvents.locationName],

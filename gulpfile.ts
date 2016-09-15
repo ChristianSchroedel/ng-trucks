@@ -151,11 +151,11 @@ gulp.task('watch', () => {
 gulp.task('build.dev', (done) => {
   runSequence(
 //    'clean',
+    'compile.sass',
     'copy.assets',
 //    'copy.libs',
     'build.server',
     'build.client',
-    'compile.sass',
     done);
 });
 

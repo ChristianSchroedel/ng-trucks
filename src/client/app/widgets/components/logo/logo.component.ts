@@ -1,7 +1,7 @@
 /**
  * Created by Christian Schrödel on 06.09.2016.
  */
-import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -13,6 +13,7 @@ import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input} from '@ang
 })
 export class LogoComponent {
   @Input() urlLogo: string;
-  @Input() urlLink: string;
   @Input() title: string;
+  @Input() subTitle: string;
+  @Output() clicked: EventEmitter<any> = new EventEmitter<any>();
 }

@@ -1,0 +1,5 @@
+<div *ngFor="let truckLocation of locations"
+     class="location-card">
+  <location [truckLocation]="truckLocation"
+            (locationClicked)="locationClicked.emit($event)"></location>
+</div>
