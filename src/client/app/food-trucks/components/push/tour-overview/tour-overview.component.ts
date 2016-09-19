@@ -3,6 +3,8 @@
  */
 import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 import {TruckEvent} from '../../../types/truck-events';
+import {TruckLocation} from '../../../types/truck-locations';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -10,9 +12,10 @@ import {TruckEvent} from '../../../types/truck-events';
   templateUrl: 'tour-overview.component.html',
   styleUrls: ['tour-overview.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  pipes: [AsyncPipe]
 })
 export class TourOverviewComponent {
   @Input() truckEvents: TruckEvent[];
-  @Output() operatorClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() locationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
 }

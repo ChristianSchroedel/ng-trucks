@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/combineLatest';
 import {Region, getRegion} from '../../types/truck-regions';
 import {FoodTruckService, Operator} from '../../services/foodtruck.service';
@@ -28,6 +29,8 @@ export class RegionViewComponent implements OnInit, OnDestroy {
   private region: Region;
   private operators: Operator[];
 
+  private detailedOperator$: Observable<Operator>;
+
   private sub: Subscription;
 
   constructor(private foodTruckService: FoodTruckService,
@@ -36,6 +39,8 @@ export class RegionViewComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private screenActions: ScreenActions) {
     this.operators = [];
+    this.detailedOperator$ = new Observable<Operator>();
+    this.detailedOperator$.startWith(undefined);
   }
 
   ngOnInit() {
@@ -82,10 +87,6 @@ export class RegionViewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/location', location.name], navExtras);
   }
 
-  goToTruck(operator: Operator) {
-    this.router.navigate(['/truck', operator.id]);
-  }
-
   private loadNextLocation = (loadedLocations: string[]) => {
     let location: TruckLocation = this.region.truckLocations.find((location: TruckLocation) => {
       return !loadedLocations.includes(location.name)
@@ -106,11 +107,27 @@ export class RegionViewComponent implements OnInit, OnDestroy {
     let operatorIdsForRegion: string[] = [];
 
     loadedEventsForRegion.forEach((location: TruckEvents) => {
-      operatorIdsForRegion = operatorIdsForRegion.concat(location.events.map((event: TruckEvent) => event.operatorId))
+      operatorIdsForRegion = operatorIdsForRegion.concat(location.events.map((event: TruckEvent) => event.operator.id))
     });
 
     this.operators = operators.filter((operator: Operator) => {
       return operatorIdsForRegion.includes(operator.id);
+    });
+
+    this.operators.forEach((operator: Operator) => {
+      operator.locations = loadedEventsForRegion
+        .filter((events: TruckEvents) => {
+          return undefined !== events.events.find((truckEvent: TruckEvent) => truckEvent.operator.id === operator.id)
+        })
+        .map((events: TruckEvents) => {
+          return {
+            name: events.locationName,
+            geoLocation: {
+              longitude: events.longitude,
+              latitude: events.latitude
+            }
+          }
+        });
     });
   }
 }

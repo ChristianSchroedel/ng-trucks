@@ -2,6 +2,8 @@
 @import '../../../../../assets/css/palette';
 
 location {
+  cursor: pointer;
+
   .wrapper {
     @include card;
     height: 150px;

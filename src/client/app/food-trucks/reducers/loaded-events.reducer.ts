@@ -32,7 +32,7 @@ export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: Loa
       let loadEvents: TruckEvents = action.payload;
 
       return {
-        loadedLocations: [...state.loadedLocations, loadEvents.locationName],
+        loadedLocations: state.loadedLocations.slice(),
         events: [
           ...state.events,
           {

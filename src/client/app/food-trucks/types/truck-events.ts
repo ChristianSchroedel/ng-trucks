@@ -11,13 +11,6 @@ export interface TruckEvents {
 }
 
 export class TruckEvent {
-  vendorName: string;
-  vendorLogo: string;
-  vendorUrl: string;
-  vendorOffer: string;
-
-  operatorId: string;
-
   date: string;
   weekDay: string;
   startTime: string;
@@ -28,20 +21,9 @@ export class TruckEvent {
   streetName: string;
   streetNumber: string;
 
-  constructor(tour: Tour, private operator: Operator) {
-    this.extractVendorInformation(operator);
-
+  constructor(tour: Tour, public operator: Operator) {
     this.extractDateTime(tour);
     this.extractLocation(tour);
-  }
-
-  private extractVendorInformation(operator: Operator) {
-    this.vendorName = operator.nameShort || operator.name;
-    this.vendorLogo = operator.logo;
-    this.vendorUrl = operator.name_url || operator.url || '';
-    this.vendorOffer = operator.offer;
-
-    this.operatorId = operator.id;
   }
 
   private extractDateTime(tour: Tour) {

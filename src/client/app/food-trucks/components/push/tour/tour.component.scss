@@ -1,36 +1,37 @@
 @import '../../../../../assets/css/containers';
+@import '../../../../../assets/css/palette';
 
 tour {
   @include card;
   display: flex;
-
-  logo::after {
-    content: '';
-    display: inline-block;
-    min-width: 2px;
-    height: 120px;
-    margin: 5px;
-    background: $color-bg-button;
-    align-self: center;
-  }
-
-  @include respond-to(max-width, 350px) {
-    logo {
-      max-width: 132px;
-      min-height: 132px;
-
-      img {
-        width: 100px;
-        height: 75px;
-      }
-    }
-  }
+  flex-direction: column;
 
   .event-metadata {
     margin: 10px;
 
     p {
       margin: 5px 0;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      margin: 10px 0;
+      background: $color-bg-button;
+      align-self: center;
+    }
+  }
+
+  truck {
+    .operator-info {
+      align-items: center;
+      flex-direction: column;
+
+      .operator-locations {
+        display: none;
+      }
     }
   }
 }

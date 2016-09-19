@@ -33,6 +33,7 @@ export interface Operator {
   colors: Colors;
   premium: boolean;
   name_url: string;
+  locations?: TruckLocation[];
 }
 
 export interface Tour {

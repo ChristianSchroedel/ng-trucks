@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -14,6 +14,7 @@ import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
 import {SCREEN} from '../../../reducers/screen.reducer';
 import {ScreenActions} from '../../../actions/screen';
+import {TruckLocation} from '../../types/truck-locations';
 
 @Component({
   moduleId: module.id,
@@ -79,7 +80,13 @@ export class LocationViewComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  showTruckOperator(operatorId: string) {
-    this.router.navigate(['/truck', operatorId]);
+  goToLocation(location: TruckLocation) {
+    let geoLocation = location.geoLocation;
+
+    let navExtras: NavigationExtras = {
+      queryParams: {longitude: geoLocation.longitude, latitude: geoLocation.latitude}
+    };
+
+    this.router.navigate(['/location', location.name], navExtras);
   }
 }

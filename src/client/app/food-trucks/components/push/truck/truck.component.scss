@@ -1,17 +1,34 @@
 @import '../../../../../assets/css/containers';
+@import '../../../../../assets/css/palette';
 
 truck {
   .operator-info {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 
-    .operator-description {
-      padding: 10px;
+    @include respond-to(max-width, 360px) {
+      align-items: center;
+      flex-direction: column;
     }
 
-    logo {
-      @include card;
+    .operator-locations {
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        display: inline-block;
+        text-decoration: none;
+        margin: 5px;
+        padding: 5px;
+        color: $font-color-bright;
+        background: $color-bg-button;
+        cursor: pointer;
+      }
     }
+  }
+
+  .operator-description {
+    padding: 10px;
   }
 
   .operator-impressions {
@@ -25,15 +42,13 @@ truck {
     }
 
     img {
-      width: 200px;
-      height: 200px;
-    }
-  }
+      width: 75px;
+      height: 75px;
 
-  @include respond-to(max-width, 500px) {
-    .operator-info {
-      flex-direction: column;
-      align-items: center;
+      @include respond-to(max-width, 330px) {
+        width: 65px;
+        height: 65px;
+      }
     }
   }
 }

@@ -1,6 +1,4 @@
-<logo *ngFor="let operator of operators"
-      [urlLogo]="operator.logo"
-      [title]="operator.nameShort || operator.name"
-      [subTitle]="operator.offer"
-      (clicked)="operatorClicked.emit(operator)"
-      class="operator-card"></logo>
+<truck *ngFor="let operator of operators"
+       [operator]="operator"
+       (locationClicked)="operatorLocationClicked.emit($event)"
+       class="operator-card"></truck>

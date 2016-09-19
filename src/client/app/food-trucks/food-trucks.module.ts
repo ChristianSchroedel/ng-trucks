@@ -9,7 +9,6 @@ import {TourComponent} from './components/push/tour/tour.component';
 import {TourOverviewComponent} from './components/push/tour-overview/tour-overview.component';
 import {TruckComponent} from './components/push/truck/truck.component';
 import {TruckOverviewComponent} from './components/push/truck-overview/truck-overview.component';
-import {TruckViewComponent} from './components/truck-view/truck-view.component';
 import {LocationOverviewComponent} from './components/push/location-overview/location-overview.component';
 import {LocationComponent} from './components/push/location/location.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
@@ -27,7 +26,6 @@ import {LoadedOperatorsActions} from './actions/loaded-operators';
     TruckOverviewComponent,
     LocationComponent,
     LocationOverviewComponent,
-    TruckViewComponent,
     LocationViewComponent,
     RegionViewComponent
   ],
