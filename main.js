@@ -8,7 +8,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-var PORT = process.env.PORT || 5555;
+var PORT = process.env.PORT || 8080;
 var DIST_DIR = path.resolve(__dirname, 'dist');
 
 var FOOD_TRUCKS_API_URL = 'https://www.food-trucks-deutschland.de/api/locations/getTours.json';
