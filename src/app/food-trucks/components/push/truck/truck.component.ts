@@ -13,8 +13,7 @@ import {TruckLocation} from '../../../types/truck-locations';
   templateUrl: 'truck.component.html',
   styleUrls: ['./truck.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  pipes: [AsyncPipe]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TruckComponent {
   @Input() operator: Operator;

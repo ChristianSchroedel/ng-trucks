@@ -11,8 +11,7 @@ import {AsyncPipe} from '@angular/common';
   templateUrl: 'tour-overview.component.html',
   styleUrls: ['./tour-overview.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  pipes: [AsyncPipe]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TourOverviewComponent {
   @Input() truckEvents: TruckEvent[];

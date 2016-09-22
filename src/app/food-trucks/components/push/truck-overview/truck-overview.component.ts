@@ -11,8 +11,7 @@ import {TruckLocation} from '../../../types/truck-locations';
   templateUrl: 'truck-overview.component.html',
   styleUrls: ['./truck-overview.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  pipes: [AsyncPipe]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TruckOverviewComponent {
   @Input() operators: Operator[];
