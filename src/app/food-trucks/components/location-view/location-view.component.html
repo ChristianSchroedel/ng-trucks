@@ -1,0 +1,3 @@
+<tour-overview *ngIf="truckEvents"
+               [truckEvents]="truckEvents.events"
+               (locationClicked)="goToLocation($event)"></tour-overview>

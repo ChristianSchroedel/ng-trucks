@@ -1,8 +1,0 @@
-<location-overview *ngIf="region"
-                   [locations]="region.truckLocations"
-                   (locationClicked)="goToLocation($event)"></location-overview>
-<hr>
-<h4>Food-Trucks in Umgebung von {{regionName}}</h4>
-<truck-overview class="truck-cards"
-                [operators]="operators"
-                (operatorClicked)="goToTruck($event)"></truck-overview>

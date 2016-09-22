@@ -1,7 +1,0 @@
-<div class="truck-tour-card" *ngFor="let event of truckEvents">
-  <tour [event]="event"
-        (operatorClicked)="operatorClicked.emit($event)"></tour>
-</div>
-<div *ngIf="!truckEvents.length" class="no-events">
-  <p>Zur Zeit keine Food-Trucks ... :-(</p>
-</div>
