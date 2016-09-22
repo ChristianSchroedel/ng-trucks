@@ -1,16 +1,22 @@
 {
-  "name": "ng2-foodtrucks",
-  "version": "0.2.1",
+  "name": "ng-trucks",
   "description": "Angular 2 Food-Truck App",
+  "version": "0.2.2",
+  "engines": {
+    "node": "6.3.1",
+    "npm": "3.10.3"
+  },
   "main": "main.js",
   "keywords": [],
   "author": "Christian Schrödel",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080",
-    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
+    "start": "node main.js",
+    "serve.dev": "webpack-dev-server --inline --progress --port 8080",
+    "build.prod": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "build.dev": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "heroku-postbuild": "npm run build.prod"
   },
   "dependencies": {
     "@angular/common": "2.0.0",
