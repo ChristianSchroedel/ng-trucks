@@ -8,7 +8,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-var PORT = 5555;
+var PORT = process.env.PORT || 5555;
 var DIST_DIR = path.resolve(__dirname, 'dist');
 
 var FOOD_TRUCKS_API_URL = 'https://www.food-trucks-deutschland.de/api/locations/getTours.json';
@@ -57,5 +57,5 @@ app.post('/api/food-trucks', parseUrlEncoded, function(req, res) {
 });
 
 app.listen(PORT, function() {
-  console.log('app listening on port: ' + PORT);
+  console.log('app listening on port: ' + this.address().port);
 });
