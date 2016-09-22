@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 
 var PORT = 5555;
-var CLIENT_DIR = path.resolve(__dirname, '../client');
+var DIST_DIR = path.resolve(__dirname, 'dist');
 
 var FOOD_TRUCKS_API_URL = 'https://www.food-trucks-deutschland.de/api/locations/getTours.json';
 
@@ -25,9 +25,9 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 
-app.use('/', express.static(CLIENT_DIR));
+app.use('/', express.static(DIST_DIR));
 app.get('*', function(req, res) {
-  return res.sendFile(path.join(CLIENT_DIR, 'index.html'));
+  return res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 
 app.post('/api/food-trucks', parseUrlEncoded, function(req, res) {
