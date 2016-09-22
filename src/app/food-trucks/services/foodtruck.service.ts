@@ -12,7 +12,7 @@ import {AppState} from '../../app.state';
 import {LoadedEventsActions} from '../actions/loaded-events';
 import {LoadedOperatorsActions} from '../actions/loaded-operators';
 
-const FOODTRUCK_API_URL: string = 'http://localhost:5555/api/food-trucks';
+const FOODTRUCK_API_URL: string = 'https://ng-trucks.herokuapp.com/api/food-trucks';
 
 interface TruckList {
   locationName: string;
