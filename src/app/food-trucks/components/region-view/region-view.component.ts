@@ -16,8 +16,6 @@ import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
 import {TruckLocation} from '../../types/truck-locations';
 import {TruckEvents, TruckEvent} from '../../types/truck-events';
-import {ScreenActions} from '../../../actions/screen';
-import {SCREEN} from '../../../reducers/screen.reducer';
 
 @Component({
   selector: 'region-view',
@@ -35,8 +33,7 @@ export class RegionViewComponent implements OnInit, OnDestroy {
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
               private router: Router,
-              private route: ActivatedRoute,
-              private screenActions: ScreenActions) {
+              private route: ActivatedRoute) {
     this.operators = [];
     this.detailedOperator$ = new Observable<Operator>();
     this.detailedOperator$.startWith(undefined);
@@ -58,11 +55,6 @@ export class RegionViewComponent implements OnInit, OnDestroy {
 
       this.region = getRegion(params.regionName);
       this.regionName = this.region.name;
-
-      this.store.dispatch(this.screenActions.setCurrentScreen({
-        screen: SCREEN.REGION_VIEW,
-        title: this.regionName
-      }));
 
       // Preload locations for this region
       this.loadNextLocation(loadedEvents.loadedLocations);

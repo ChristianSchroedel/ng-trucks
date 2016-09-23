@@ -10,9 +10,8 @@ import {MainComponent} from './app.component';
 import {FoodTrucksModule} from './food-trucks/food-trucks.module';
 import {loadedEventsReducer} from './food-trucks/reducers/loaded-events.reducer';
 import {loadedOperatorsReducer} from './food-trucks/reducers/loaded-operators.reducer';
-import {ScreenActions} from './actions/screen';
-import {screenReducer} from './reducers/screen.reducer';
 import {WidgetsModule} from './widgets/widgets.module';
+import {CommonPagesModule} from './common-pages/common-pages.module';
 
 @NgModule({
   imports: [
@@ -21,16 +20,15 @@ import {WidgetsModule} from './widgets/widgets.module';
     routing,
     StoreModule.provideStore({
       loadedEvents: loadedEventsReducer,
-      loadedOperators: loadedOperatorsReducer,
-      currentScreen: screenReducer
+      loadedOperators: loadedOperatorsReducer
     }),
     FoodTrucksModule,
-    WidgetsModule
+    WidgetsModule,
+    CommonPagesModule
   ],
   declarations: [MainComponent],
   providers: [
-    appRoutingProviders,
-    ScreenActions
+    appRoutingProviders
   ],
   bootstrap: [MainComponent]
 })

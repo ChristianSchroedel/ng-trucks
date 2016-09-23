@@ -1,13 +1,13 @@
 <header>
   <h1>Food-Trucks</h1>
-  <navbar [title]="screenTitle" [showBack]="showBack" (backPressed)="location.back()"></navbar>
 </header>
 <article>
   <router-outlet></router-outlet>
 </article>
 <footer>
   <ul>
-    <li>Impressum</li>
+    <li><a [routerLink]="['impressum']">Impressum</a></li>
+    <li><a [routerLink]="['dps']">Datenschutzerklärung</a></li>
     <li>Kontakt</li>
   </ul>
   <h5>&copy; Christian Schrödel</h5>

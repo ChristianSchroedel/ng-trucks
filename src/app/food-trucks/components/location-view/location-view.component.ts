@@ -12,8 +12,6 @@ import {TruckEvents} from '../../types/truck-events';
 import {FoodTruckService} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
-import {SCREEN} from '../../../reducers/screen.reducer';
-import {ScreenActions} from '../../../actions/screen';
 import {TruckLocation} from '../../types/truck-locations';
 
 @Component({
@@ -21,13 +19,13 @@ import {TruckLocation} from '../../types/truck-locations';
   templateUrl: 'location-view.component.html'
 })
 export class LocationViewComponent implements OnInit, OnDestroy {
+  private locationName: string;
   private truckEvents: TruckEvents;
 
   private sub: Subscription;
 
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
-              private screenActions: ScreenActions,
               private router: Router,
               private route: ActivatedRoute,
               private location: Location) {
@@ -53,10 +51,7 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
       console.log(`show location: ${locationName}`);
 
-      this.store.dispatch(this.screenActions.setCurrentScreen({
-        screen: SCREEN.LOCATION_VIEW,
-        title: locationName
-      }));
+      this.locationName = locationName;
 
       if (!loadedEvents.loadedLocations.includes(locationName)) {
         this.foodTruckService.loadTruckListForLocation({
