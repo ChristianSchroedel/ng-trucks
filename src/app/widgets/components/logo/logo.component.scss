@@ -1,5 +1,3 @@
-@import '../../../../assets/sass-global/containers';
-
 logo {
   min-width: 162px;
   max-width: 162px;
@@ -19,17 +17,6 @@ logo {
 
     p {
       text-align: center;
-    }
-  }
-
-  @include respond-to(max-width, 320px) {
-    min-width: 110px;
-    max-width: 162px;
-    min-height: 110px;
-
-    img {
-      width: 100px;
-      height: 75px;
     }
   }
 }
