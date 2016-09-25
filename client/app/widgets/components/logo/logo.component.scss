@@ -1,7 +1,4 @@
 logo {
-  min-width: 162px;
-  max-width: 162px;
-  min-height: 162px;
   cursor: pointer;
 
   .logo-wrapper {
@@ -15,8 +12,10 @@ logo {
       height: 112px;
     }
 
-    p {
-      text-align: center;
+    .logo-caption {
+      p {
+        text-align: center;
+      }
     }
   }
 }
