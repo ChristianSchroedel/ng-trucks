@@ -6,11 +6,6 @@ truck {
     display: flex;
     justify-content: flex-start;
 
-    @include respond-to(max-width, 360px) {
-      align-items: center;
-      flex-direction: column;
-    }
-
     .operator-locations {
       display: flex;
       flex-wrap: wrap;
@@ -38,7 +33,7 @@ truck {
 
     .operator-impression {
       @include card;
-      margin-right: 5px;
+      padding: 0;
     }
 
     img {

@@ -6,6 +6,7 @@ import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/startWith';
@@ -26,7 +27,7 @@ export class RegionViewComponent implements OnInit, OnDestroy {
   private region: Region;
   private operators: Operator[];
 
-  private detailedOperator$: Observable<Operator>;
+  private clickedOperator$: BehaviorSubject<Operator>;
 
   private sub: Subscription;
 
@@ -35,8 +36,7 @@ export class RegionViewComponent implements OnInit, OnDestroy {
               private router: Router,
               private route: ActivatedRoute) {
     this.operators = [];
-    this.detailedOperator$ = new Observable<Operator>();
-    this.detailedOperator$.startWith(undefined);
+    this.clickedOperator$ = new BehaviorSubject<Operator>(undefined);
   }
 
   ngOnInit() {

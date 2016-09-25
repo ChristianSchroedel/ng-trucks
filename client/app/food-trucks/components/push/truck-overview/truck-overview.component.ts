@@ -15,6 +15,5 @@ import {TruckLocation} from '../../../types/truck-locations';
 })
 export class TruckOverviewComponent {
   @Input() operators: Operator[];
-  @Output() operatorClicked: EventEmitter<string> = new EventEmitter<string>();
-  @Output() operatorLocationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
+  @Output() operatorClicked: EventEmitter<Operator> = new EventEmitter<Operator>();
 }

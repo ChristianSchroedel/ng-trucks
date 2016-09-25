@@ -15,5 +15,24 @@ truck-overview {
     @include respond-to(max-width, 725px) {
       max-width: 536px;
     }
+
+    logo {
+      width: 160px;
+      height: 160px;
+
+      @include respond-to(max-width, 450px) {
+        width: 100px;
+        height: 75px;
+
+        .logo-caption {
+          display: none;
+        }
+
+        img {
+          width: 100px;
+          height: 75px;
+        }
+      }
+    }
   }
 }

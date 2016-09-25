@@ -4,6 +4,7 @@
 import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 import {TruckEvent} from '../../../types/truck-events';
 import {TruckLocation} from '../../../types/truck-locations';
+import {Operator} from '../../../services/foodtruck.service';
 
 @Component({
   selector: 'tour',
@@ -15,4 +16,5 @@ import {TruckLocation} from '../../../types/truck-locations';
 export class TourComponent {
   @Input() event: TruckEvent;
   @Output() locationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
+  @Output() operatorClicked: EventEmitter<Operator> = new EventEmitter<Operator>();
 }

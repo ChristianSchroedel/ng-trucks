@@ -4,7 +4,7 @@
 tour {
   @include card;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   .event-metadata {
     margin: 10px;
@@ -12,25 +12,19 @@ tour {
     p {
       margin: 5px 0;
     }
-
-    &::after {
-      content: '';
-      display: block;
-      height: 2px;
-      width: 100%;
-      margin: 10px 0;
-      background: $color-bg-button;
-      align-self: center;
-    }
   }
 
   truck {
-    .operator-info {
-      align-items: center;
-      flex-direction: column;
+    logo {
+      .logo-wrapper {
+        img {
+          width: 100px;
+          height: 75px;
+        }
 
-      .operator-locations {
-        display: none;
+        .logo-caption {
+          display: none;
+        }
       }
     }
   }

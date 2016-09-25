@@ -1,7 +1,7 @@
+<truck [operator]="event.operator"
+       (logoClicked)="operatorClicked.emit(event.operator)"></truck>
 <div class="event-metadata">
   <p>{{event.date}}</p>
   <p><strong>{{event.startTime}} bis {{event.endTime}} Uhr</strong></p>
   <p>{{event.streetName}} {{event.streetNumber}}, {{event.zipCode}} {{event.cityName}}</p>
 </div>
-<truck [operator]="event.operator"
-       (locationClicked)="locationClicked.emit($event)"></truck>

@@ -43,18 +43,9 @@ app {
     padding: 10px;
   }
 
-  logo {
-    @include respond-to(max-width, 320px) {
-      min-width: 110px;
-      max-width: 162px;
-      min-height: 110px;
-
-      .logo-wrapper {
-        img {
-          width: 100px;
-          height: 75px;
-        }
-      }
+  modal-dialog {
+    .modal-content {
+      background: $color-bg-card;
     }
   }
 
