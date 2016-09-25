@@ -7,9 +7,10 @@ import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/combineLatest';
 import {TruckEvents} from '../../types/truck-events';
-import {FoodTruckService} from '../../services/foodtruck.service';
+import {FoodTruckService, Operator} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
 import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
 import {TruckLocation} from '../../types/truck-locations';
@@ -22,6 +23,8 @@ export class LocationViewComponent implements OnInit, OnDestroy {
   private locationName: string;
   private truckEvents: TruckEvents;
 
+  private clickedOperator$: BehaviorSubject<Operator>;
+
   private sub: Subscription;
 
   constructor(private foodTruckService: FoodTruckService,
@@ -29,6 +32,7 @@ export class LocationViewComponent implements OnInit, OnDestroy {
               private router: Router,
               private route: ActivatedRoute,
               private location: Location) {
+    this.clickedOperator$ = new BehaviorSubject<Operator>(undefined);
   }
 
   ngOnInit() {

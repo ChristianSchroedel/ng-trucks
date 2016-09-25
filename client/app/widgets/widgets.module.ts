@@ -4,11 +4,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LogoComponent} from './components/logo/logo.component';
+import {ModalDialogComponent} from './components/modal-dialog/modal-dialog.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [LogoComponent],
-  exports: [LogoComponent]
+  declarations: [LogoComponent, ModalDialogComponent],
+  exports: [LogoComponent, ModalDialogComponent]
 })
 export class WidgetsModule {
 }

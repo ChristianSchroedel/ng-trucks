@@ -4,4 +4,4 @@
   <p>{{event.streetName}} {{event.streetNumber}}, {{event.zipCode}} {{event.cityName}}</p>
 </div>
 <truck [operator]="event.operator"
-       (locationClicked)="locationClicked.emit($event)"></truck>
+       (logoClicked)="operatorClicked.emit(event.operator)"></truck>

@@ -1,0 +1,19 @@
+@import 'utils';
+@import 'base-colors';
+
+@mixin modal-dialog-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $color-modal-site-bg;
+}
+
+@mixin modal-dialog {
+  @include box-shadow(5px, 6px);
+  position: fixed;
+  align-items: center;
+  padding: 5px;
+  background: $color-modal-bg;
+}

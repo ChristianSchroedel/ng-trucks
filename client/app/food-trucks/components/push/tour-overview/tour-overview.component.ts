@@ -5,6 +5,7 @@ import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation, Output, Ev
 import {TruckEvent} from '../../../types/truck-events';
 import {TruckLocation} from '../../../types/truck-locations';
 import {AsyncPipe} from '@angular/common';
+import {Operator} from '../../../services/foodtruck.service';
 
 @Component({
   selector: 'tour-overview',
@@ -16,4 +17,5 @@ import {AsyncPipe} from '@angular/common';
 export class TourOverviewComponent {
   @Input() truckEvents: TruckEvent[];
   @Output() locationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
+  @Output() operatorClicked: EventEmitter<Operator> = new EventEmitter<Operator>();
 }

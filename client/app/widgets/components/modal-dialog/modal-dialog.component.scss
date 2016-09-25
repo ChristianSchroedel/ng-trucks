@@ -1,0 +1,15 @@
+@import '../../sass/dialogs';
+
+modal-dialog {
+  .modal-bg {
+    @include modal-dialog-bg;
+  }
+
+  .modal-content {
+    @include modal-dialog;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

@@ -58,6 +58,12 @@ app {
     }
   }
 
+  modal-dialog {
+    .modal-content {
+      background: $color-bg-card;
+    }
+  }
+
   footer {
     padding: 5px;
     color: $font-color-bright;

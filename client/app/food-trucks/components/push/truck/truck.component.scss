@@ -38,7 +38,7 @@ truck {
 
     .operator-impression {
       @include card;
-      margin-right: 5px;
+      padding: 0;
     }
 
     img {

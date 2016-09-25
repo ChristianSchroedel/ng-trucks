@@ -1,0 +1,4 @@
+<div *ngIf="showDialog" class="modal-bg" (click)="dismissDialog.emit()"></div>
+<div *ngIf="showDialog" class="modal-content">
+  <ng-content></ng-content>
+</div>

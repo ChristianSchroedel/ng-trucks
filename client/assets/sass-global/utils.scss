@@ -1,0 +1,5 @@
+@import 'palette';
+
+@mixin box-shadow($offsetY, $blur) {
+  box-shadow: 0 $offsetY $blur 0 $color-bg-footer;
+}
