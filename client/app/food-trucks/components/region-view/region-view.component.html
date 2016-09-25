@@ -1,0 +1,19 @@
+<div class="region-content">
+  <h1>{{regionName}}</h1>
+  <location-overview *ngIf="region"
+                     [locations]="region.truckLocations"
+                     (locationClicked)="goToLocation($event)"></location-overview>
+  <hr>
+  <h4>Food-Trucks in Umgebung von {{regionName}}</h4>
+  <truck-overview [operators]="operators"
+                  (operatorClicked)="clickedOperator$.next($event)"
+                  class="truck-cards"></truck-overview>
+</div>
+<modal-dialog *ngIf="clickedOperator$.getValue()"
+              [showDialog]="clickedOperator$.getValue()"
+              (dismissDialog)="clickedOperator$.next(undefined)">
+  <truck [operator]="clickedOperator$.getValue()"
+         [showDetails]="true"
+         (logoClicked)="clickedOperator$.next(undefined)"
+         (locationClicked)="goToLocation($event)"></truck>
+</modal-dialog>

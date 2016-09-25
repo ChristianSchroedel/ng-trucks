@@ -1,17 +1,17 @@
 {
-  "name": "ng-trucks",
+  "name": "ng2-trucks",
   "description": "Angular 2 Food-Truck App",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "engines": {
     "node": "6.3.1",
     "npm": "3.10.3"
   },
-  "main": "main.js",
+  "main": "server.js",
   "keywords": [],
   "author": "Christian Schrödel",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
-    "start": "node main.js",
+    "start": "node server.js",
     "serve.dev": "webpack-dev-server --inline --progress --port 8080",
     "build.prod": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "build.dev": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",

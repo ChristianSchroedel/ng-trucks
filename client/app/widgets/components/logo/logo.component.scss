@@ -1,0 +1,21 @@
+logo {
+  cursor: pointer;
+
+  .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 150px;
+      height: 112px;
+    }
+
+    .logo-caption {
+      p {
+        text-align: center;
+      }
+    }
+  }
+}

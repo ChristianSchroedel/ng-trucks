@@ -1,0 +1,31 @@
+@import '../../../../../assets/sass-global/containers';
+@import '../../../../../assets/sass-global/palette';
+
+tour {
+  @include card;
+  display: flex;
+  flex-direction: row;
+
+  .event-metadata {
+    margin: 10px;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+
+  truck {
+    logo {
+      .logo-wrapper {
+        img {
+          width: 100px;
+          height: 75px;
+        }
+
+        .logo-caption {
+          display: none;
+        }
+      }
+    }
+  }
+}

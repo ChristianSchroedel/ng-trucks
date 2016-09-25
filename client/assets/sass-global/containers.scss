@@ -1,0 +1,16 @@
+@import 'palette';
+@import 'utils';
+
+@mixin respond-to($val, $query) {
+  @media ($val: $query) {
+    @content
+  }
+}
+
+@mixin card {
+  @include box-shadow(1px, 2px);
+  align-items: center;
+  margin: 4px;
+  padding: 5px;
+  background: $color-bg-card;
+}

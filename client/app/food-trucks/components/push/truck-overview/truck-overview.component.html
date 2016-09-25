@@ -1,0 +1,4 @@
+<truck *ngFor="let operator of operators"
+       [operator]="operator"
+       (logoClicked)="operatorClicked.emit($event)"
+       class="operator-card"></truck>

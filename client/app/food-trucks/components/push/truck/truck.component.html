@@ -1,0 +1,21 @@
+<div class="operator-info">
+  <logo [urlLogo]="operator.logo"
+        [title]="operator.nameShort || operator.name"
+        [subTitle]="operator.offer"
+        (clicked)="logoClicked.emit(operator)"></logo>
+  <div *ngIf="showDetails" class="operator-locations">
+    <ul>
+      <li *ngFor="let location of operator.locations"
+          (click)="locationClicked.emit(location)">{{location.name}}
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="showDetails" class="operator-metadata">
+  <p class="operator-description">{{operator.description}}</p>
+  <div class="operator-impressions">
+    <div *ngFor="let impression of operator.impressions" class="operator-impression">
+      <img [src]="impression" alt="Impression">
+    </div>
+  </div>
+</div>

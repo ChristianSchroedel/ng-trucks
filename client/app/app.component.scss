@@ -1,0 +1,105 @@
+@import '../assets/sass-global/palette';
+@import '../assets/sass-global/containers';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: $font-color-dark;
+  background: $color-bg-body;
+}
+
+hr {
+  margin: 20px;
+}
+
+h1 {
+  padding: 5px;
+}
+
+h2 {
+  padding: 5px;
+}
+
+h4 {
+  padding: 20px;
+  text-align: center;
+}
+
+a {
+  color: $font-color-bright;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $font-color-bright-hover;
+  }
+}
+
+app {
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: $font-color-bright;
+    background: $color-bg-header;
+
+    @include respond-to(max-width, 450px) {
+      height: 60px;
+    }
+  }
+
+  article {
+    max-width: 800px;
+    margin: auto auto;
+    padding: 10px;
+
+    .navigate-back {
+      display: inline-block;
+      padding: 5px;
+      color: $font-color-bright;
+      background: $color-bg-button;
+      cursor: pointer;
+    }
+  }
+
+  modal-dialog {
+    .modal-content {
+      background: $color-bg-card;
+    }
+  }
+
+  footer {
+    padding: 5px;
+    color: $font-color-bright;
+    background: $color-bg-footer;
+    text-align: center;
+
+    ul, h5 {
+      margin: 10px;
+    }
+
+    ul {
+      text-align: center;
+
+      li {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      li:nth-child(n+2)::before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 20px;
+        background: $font-color-bright;
+        margin: 0 5px;
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}
