@@ -3,8 +3,6 @@
  */
 
 import {Component, Input, ViewEncapsulation, ChangeDetectionStrategy, EventEmitter, Output} from '@angular/core';
-import {AsyncPipe} from '@angular/common';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Operator} from '../../../services/foodtruck.service';
 import {TruckLocation} from '../../../types/truck-locations';
 
@@ -17,11 +15,7 @@ import {TruckLocation} from '../../../types/truck-locations';
 })
 export class TruckComponent {
   @Input() operator: Operator;
+  @Input() showDetails: boolean;
+  @Output() logoClicked: EventEmitter<Operator> = new EventEmitter<Operator>();
   @Output() locationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
-
-  private showDetails$: BehaviorSubject<boolean>;
-
-  constructor() {
-    this.showDetails$ = new BehaviorSubject<boolean>(false);
-  }
 }
