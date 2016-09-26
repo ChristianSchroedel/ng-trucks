@@ -11,10 +11,8 @@ export interface TruckEvents {
 }
 
 export class TruckEvent {
-  date: string;
-  weekDay: string;
-  startTime: string;
-  endTime: string;
+  startDate: Date;
+  endDate: Date;
 
   cityName: string;
   zipCode: string;
@@ -27,24 +25,8 @@ export class TruckEvent {
   }
 
   private extractDateTime(tour: Tour) {
-    let startDate: Date = new Date(tour.start);
-    let endDate: Date = new Date(tour.end);
-
-    let startWeekDay: string = TruckEvent.getWeekDayString(startDate.getDay());
-    let startDay: string = TruckEvent.numPad(startDate.getDate());
-    let startMonth: string = TruckEvent.numPad(startDate.getMonth()+1);
-
-    this.weekDay = startWeekDay;
-    this.date = `${startWeekDay} ${startDay}.${startMonth}.${startDate.getFullYear()}`;
-
-    let startHours: string = TruckEvent.numPad(startDate.getHours());
-    let startMinutes: string = TruckEvent.numPad(startDate.getMinutes());
-
-    let endHours: string = TruckEvent.numPad(endDate.getHours());
-    let endMinutes: string = TruckEvent.numPad(endDate.getMinutes());
-
-    this.startTime = `${startHours}:${startMinutes}`;
-    this.endTime = `${endHours}:${endMinutes}`;
+    this.startDate = new Date(tour.start);
+    this.endDate = new Date(tour.end);
   }
 
   private extractLocation(tour: Tour) {
@@ -58,22 +40,5 @@ export class TruckEvent {
     this.zipCode = location.zipcode;
     this.streetName = location.street;
     this.streetNumber = location.number;
-  }
-
-  private static numPad(num: number): string {
-    return (num < 10) ? `0${num}` : `${num}`;
-  }
-
-  private static getWeekDayString(numDay: number): string {
-    switch (numDay) {
-      case 0: return 'Sonntag';
-      case 1: return 'Montag';
-      case 2: return 'Dienstag';
-      case 3: return 'Mittwoch';
-      case 4: return 'Donnerstag';
-      case 5: return 'Freitag';
-      case 6: return 'Samstag';
-      default: return '';
-    }
   }
 }

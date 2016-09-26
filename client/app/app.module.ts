@@ -1,7 +1,7 @@
 /**
  * Created by developer on 24.08.2016.
  */
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {StoreModule} from '@ngrx/store';
@@ -28,7 +28,8 @@ import {CommonPagesModule} from './common-pages/common-pages.module';
   ],
   declarations: [MainComponent],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    {provide: LOCALE_ID, useValue: 'de-DE'}
   ],
   bootstrap: [MainComponent]
 })
