@@ -1,10 +1,10 @@
 <div class="region-content">
   <h1>{{regionName}}</h1>
+  <h2>Aktive Standorte</h2>
   <location-overview *ngIf="region"
                      [locations]="region.truckLocations"
                      (locationClicked)="goToLocation($event)"></location-overview>
-  <hr>
-  <h4>Food-Trucks in Umgebung von {{regionName}}</h4>
+  <h2>Erreichbare Food-Trucks</h2>
   <truck-overview [operators]="operators"
                   (operatorClicked)="clickedOperator$.next($event)"
                   class="truck-cards"></truck-overview>

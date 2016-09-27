@@ -24,6 +24,11 @@ truck {
 
   .operator-description {
     padding: 10px;
+    min-width: 450px;
+
+    @include respond-to(max-width, 480px) {
+      min-width: 0;
+    }
   }
 
   .operator-impressions {
