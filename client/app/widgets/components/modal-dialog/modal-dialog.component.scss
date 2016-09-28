@@ -7,7 +7,7 @@ modal-dialog {
 
   .modal-content {
     @include modal-dialog;
-    position: fixed;
+    position: absolute;
     top: 50px;
     left: 50%;
     transform: translateX(-50%);

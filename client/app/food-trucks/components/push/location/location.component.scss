@@ -6,11 +6,11 @@ location {
 
   .wrapper {
     @include card;
-    margin: 5px;
+    margin: 3px;
     padding: 0;
 
-    h5 {
-      font-size: 1.2em;
+    span {
+      display: block;
       text-align: center;
       padding: 5px;
       color: $font-color-bright;

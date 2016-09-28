@@ -2,10 +2,7 @@
  * Created by Christian Schrödel on 07.09.2016.
  */
 import {Component, Input, ChangeDetectionStrategy, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
-import {TruckEvent} from '../../../types/truck-events';
-import {TruckLocation} from '../../../types/truck-locations';
-import {AsyncPipe} from '@angular/common';
-import {Operator} from '../../../services/foodtruck.service';
+import {TruckTour, TruckLocation, Operator} from '../../../types';
 
 @Component({
   selector: 'tour-overview',
@@ -15,7 +12,7 @@ import {Operator} from '../../../services/foodtruck.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TourOverviewComponent {
-  @Input() truckEvents: TruckEvent[];
+  @Input() tours: TruckTour[];
   @Output() locationClicked: EventEmitter<TruckLocation> = new EventEmitter<TruckLocation>();
   @Output() operatorClicked: EventEmitter<Operator> = new EventEmitter<Operator>();
 }

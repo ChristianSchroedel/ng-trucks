@@ -13,10 +13,10 @@ tour-overview {
   }
 
   .truck-tour-card {
-    width: 50%;
+    width: 100%;
 
-    @include respond-to(max-width, 600px) {
-      width: 100%;
+    @include respond-to(max-width, 420px) {
+      font-size: 0.8em;
     }
   }
 }

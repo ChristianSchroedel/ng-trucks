@@ -13,9 +13,8 @@ import {LocationOverviewComponent} from './components/push/location-overview/loc
 import {LocationComponent} from './components/push/location/location.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
 import {RegionViewComponent} from './components/region-view/region-view.component';
-import {FoodTruckService} from './services/foodtruck.service';
-import {LoadedEventsActions} from './actions/loaded-events';
-import {LoadedOperatorsActions} from './actions/loaded-operators';
+import {FoodTruckService, LocationService} from './services';
+import {EventsActions, OperatorsActions, LocationsActions} from './actions';
 
 @NgModule({
   imports: [CommonModule, WidgetsModule, truckRouting],
@@ -31,8 +30,10 @@ import {LoadedOperatorsActions} from './actions/loaded-operators';
   ],
   providers: [
     FoodTruckService,
-    LoadedEventsActions,
-    LoadedOperatorsActions
+    LocationService,
+    EventsActions,
+    OperatorsActions,
+    LocationsActions
   ]
 })
 export class FoodTrucksModule {

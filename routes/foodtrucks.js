@@ -12,8 +12,6 @@ router.route('/')
   .post(function(req, res) {
     var body = req.body;
 
-    console.log('POST on /api/foodtrucks', body);
-
     var date = body.date || 'today';
     var latitude = body.latitude || -1;
     var longitude = body.longitude || -1;

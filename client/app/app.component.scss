@@ -8,35 +8,53 @@
 }
 
 body {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
   color: $font-color-dark;
   background: $color-bg-body;
 }
 
-hr {
-  margin: 20px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 }
 
 h1 {
-  padding: 5px;
+  font-size: 1.5em;
+  margin: 5px 0;
 }
 
 h2 {
-  padding: 5px;
+  font-size: 1.2em;
+  margin: 10px 0 5px;
 }
 
-h4 {
-  padding: 20px;
-  text-align: center;
+p {
+  font-size: 1em;
+  line-height: 1.5;
+
+  strong {
+    display: block;
+    margin-top: 5px;
+  }
 }
 
 a {
-  color: $font-color-bright;
+  color: $font-color-link;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: $font-color-bright-hover;
+    text-decoration: underline;
   }
+}
+
+hr {
+  margin: 20px;
 }
 
 app {
@@ -51,12 +69,17 @@ app {
     @include respond-to(max-width, 450px) {
       height: 60px;
     }
+
+    .header-title {
+      font-size: 2em;
+      font-weight: bold;
+    }
   }
 
   article {
     max-width: 800px;
     margin: auto auto;
-    padding: 10px;
+    padding: 5px 20px;
 
     .navigate-back {
       display: inline-block;
@@ -70,6 +93,11 @@ app {
   modal-dialog {
     .modal-content {
       background: $color-bg-card;
+
+      @include respond-to(max-width, 480px) {
+        width: 90%;
+        font-size: 0.8em;
+      }
     }
   }
 
@@ -78,6 +106,16 @@ app {
     color: $font-color-bright;
     background: $color-bg-footer;
     text-align: center;
+
+    a {
+      color: $font-color-bright;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        color: $font-color-link;
+      }
+    }
 
     ul, h5 {
       margin: 10px;

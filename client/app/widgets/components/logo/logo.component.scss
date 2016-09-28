@@ -8,12 +8,13 @@ logo {
     align-items: center;
 
     img {
-      width: 150px;
-      height: 112px;
+      width: 140px;
+      height: 105px;
     }
 
     .logo-caption {
-      p {
+      span {
+        display: block;
         text-align: center;
       }
     }
