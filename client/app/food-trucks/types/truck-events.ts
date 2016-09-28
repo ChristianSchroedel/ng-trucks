@@ -1,13 +1,27 @@
 /**
  * Created by Christian Schrödel on 05.09.2016.
  */
-import {Tour, Operator, Location} from '../services/foodtruck.service';
+import {TruckLocation} from './truck-locations';
+import {Operator} from './truck-operators';
+import {Location} from './truck-locations';
+
+export interface TruckTour {
+  event: TruckEvent;
+  operator: Operator;
+}
 
 export interface TruckEvents {
-  locationName: string;
-  longitude: number;
-  latitude: number;
+  location: TruckLocation;
   events: TruckEvent[];
+}
+
+export interface Tour {
+  operatorid: string;
+  start: string;
+  end: string;
+  timezone: string;
+  soldout: boolean;
+  location: Location
 }
 
 export class TruckEvent {
@@ -19,9 +33,13 @@ export class TruckEvent {
   streetName: string;
   streetNumber: string;
 
-  constructor(tour: Tour, public operator: Operator) {
+  operatorId: string;
+
+  constructor(tour: Tour) {
     this.extractDateTime(tour);
     this.extractLocation(tour);
+
+    this.operatorId = tour.operatorid;
   }
 
   private extractDateTime(tour: Tour) {

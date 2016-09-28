@@ -3,8 +3,7 @@
  */
 
 import {Component, Input, ViewEncapsulation, ChangeDetectionStrategy, EventEmitter, Output} from '@angular/core';
-import {Operator} from '../../../services/foodtruck.service';
-import {TruckLocation} from '../../../types/truck-locations';
+import {TruckLocation, Operator} from '../../../types';
 
 @Component({
   selector: 'truck',

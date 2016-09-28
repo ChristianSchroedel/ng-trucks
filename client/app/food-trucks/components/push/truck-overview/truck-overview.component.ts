@@ -2,9 +2,7 @@
  * Created by Christian Schrödel on 13.09.2016.
  */
 import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewEncapsulation} from '@angular/core';
-import {AsyncPipe} from '@angular/common';
-import {Operator} from '../../../services/foodtruck.service';
-import {TruckLocation} from '../../../types/truck-locations';
+import {Operator} from '../../../types';
 
 @Component({
   selector: 'truck-overview',

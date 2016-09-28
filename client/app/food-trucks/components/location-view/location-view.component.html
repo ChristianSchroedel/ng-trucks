@@ -1,6 +1,5 @@
 <h1 (click)="location.back()" class="navigate-back">&lt; {{locationName}}</h1>
-<tour-overview *ngIf="truckEvents"
-               [truckEvents]="truckEvents.events"
+<tour-overview [tours]="tours"
                (locationClicked)="goToLocation($event)"
                (operatorClicked)="clickedOperator$.next($event)"></tour-overview>
 <modal-dialog *ngIf="clickedOperator$.getValue()"

@@ -2,22 +2,22 @@
  * Created by Christian Schrödel on 10.09.2016.
  */
 import {ActionReducer, Action} from '@ngrx/store';
-import {TruckEvents} from '../types/truck-events';
-import {LoadedEventsActions} from '../actions/loaded-events';
+import {TruckEvents} from '../types';
+import {EventsActions} from '../actions';
 
-export interface LoadedEventsState {
+export interface EventsState {
   loadedLocations: string[];
   events: TruckEvents[];
 }
 
-const initialState: LoadedEventsState = {
+const initialState: EventsState = {
   loadedLocations: [],
   events: []
 };
 
-export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: LoadedEventsState = initialState, action: Action) => {
+export const eventsReducer: ActionReducer<EventsState> = (state: EventsState = initialState, action: Action) => {
   switch (action.type) {
-    case LoadedEventsActions.LOAD_LOCATION:
+    case EventsActions.LOAD_EVENTS_FOR_LOCATION:
       let location: string = action.payload;
 
       if (state.loadedLocations.includes(location)) {
@@ -28,7 +28,7 @@ export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: Loa
         loadedLocations: [...state.loadedLocations, location],
         events: state.events.slice()
       };
-    case LoadedEventsActions.LOAD_LOCATION_DONE:
+    case EventsActions.LOAD_EVENTS_FOR_LOCATION_DONE:
       let loadEvents: TruckEvents = action.payload;
 
       return {
@@ -36,9 +36,7 @@ export const loadedEventsReducer: ActionReducer<LoadedEventsState> = (state: Loa
         events: [
           ...state.events,
           {
-            longitude: loadEvents.longitude,
-            latitude: loadEvents.latitude,
-            locationName: loadEvents.locationName,
+            location: Object.assign({}, loadEvents.location),
             events: loadEvents.events.slice()
           }
         ]

@@ -2,7 +2,7 @@
  * Created by Christian Schrödel on 13.09.2016.
  */
 import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {TruckLocation} from '../../../types/truck-locations';
+import {TruckLocation} from '../../../types';
 
 @Component({
   selector: 'location-overview',

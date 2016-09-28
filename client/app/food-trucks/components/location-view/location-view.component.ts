@@ -3,17 +3,16 @@
  */
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/combineLatest';
-import {TruckEvents} from '../../types/truck-events';
-import {FoodTruckService, Operator} from '../../services/foodtruck.service';
+import {FoodTruckService} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
-import {LoadedEventsState} from '../../reducers/loaded-events.reducer';
-import {TruckLocation} from '../../types/truck-locations';
+import {EventsState} from '../../reducers';
+import {TruckEvents, TruckEvent, TruckTour, TruckLocation, locations, Operator} from '../../types';
 
 @Component({
   selector: 'location-view',
@@ -21,7 +20,7 @@ import {TruckLocation} from '../../types/truck-locations';
 })
 export class LocationViewComponent implements OnInit, OnDestroy {
   private locationName: string;
-  private truckEvents: TruckEvents;
+  private tours: TruckTour[];
 
   private clickedOperator$: BehaviorSubject<Operator>;
 
@@ -32,46 +31,39 @@ export class LocationViewComponent implements OnInit, OnDestroy {
               private router: Router,
               private route: ActivatedRoute,
               private location: Location) {
+    this.tours = [];
     this.clickedOperator$ = new BehaviorSubject<Operator>(undefined);
   }
 
   ngOnInit() {
     let combined: Observable<any> = Observable.combineLatest(
       this.route.params,
-      this.route.queryParams,
-      this.store.select(appState => appState.loadedEvents),
-      (params: any, queryParams: any, loadedEvents: LoadedEventsState) => {
-        return {params, queryParams, loadedEvents};
+      this.store.select(appState => appState.events),
+      this.store.select(appState => appState.operators),
+      (params: any, eventsState: EventsState, operators: Operator[]) => {
+        return {params, eventsState, operators};
       });
 
-    this.sub = combined.subscribe((combined: any) => {
-      let params: any = combined.params;
-      let queryParams: any = combined.queryParams;
-      let loadedEvents: LoadedEventsState = combined.loadedEvents;
+    this.sub = combined
+      .distinctUntilChanged()
+      .subscribe((combined: any) => {
+        let params: any = combined.params;
+        let eventsState: EventsState = combined.eventsState;
+        let operators: Operator[] = combined.operators;
 
-      let locationName: string = params.locationName;
-      let longitude: number = queryParams.longitude;
-      let latitude: number = queryParams.latitude;
-
-      console.log(`show location: ${locationName}`);
-
-      this.locationName = locationName;
-
-      if (!loadedEvents.loadedLocations.includes(locationName)) {
-        this.foodTruckService.loadTruckListForLocation({
-          name: locationName,
-          geoLocation: {
-            latitude: latitude,
-            longitude: longitude
-          }
+        let locationName = params.locationName;
+        let location: TruckLocation = locations.find((location: TruckLocation) => {
+          return location.name === locationName
         });
-        return;
-      }
 
-      this.truckEvents = loadedEvents.events.find((events: TruckEvents) => {
-        return events.locationName === locationName;
+        if (!eventsState.loadedLocations.includes(locationName)) {
+          this.foodTruckService.loadTruckListForLocation(location);
+          return;
+        }
+
+        this.extractToursForLocation(eventsState.events, operators, locationName);
+        this.locationName = locationName;
       });
-    });
   }
 
   ngOnDestroy() {
@@ -79,12 +71,27 @@ export class LocationViewComponent implements OnInit, OnDestroy {
   }
 
   goToLocation(location: TruckLocation) {
-    let geoLocation = location.geoLocation;
+    this.clickedOperator$.next(undefined);
+    this.router.navigate(['/location', location.name]);
+  }
 
-    let navExtras: NavigationExtras = {
-      queryParams: {longitude: geoLocation.longitude, latitude: geoLocation.latitude}
-    };
+  private extractToursForLocation(loadedTruckEvents: TruckEvents[],
+                                  operators: Operator[],
+                                  locationName: string) {
+    let tours: TruckTour[] = [];
+    let truckEvents: TruckEvents = loadedTruckEvents.find((events: TruckEvents) => {
+      return events.location.name === locationName;
+    });
 
-    this.router.navigate(['/location', location.name], navExtras);
+    if (truckEvents && truckEvents.events) {
+      truckEvents.events.forEach((event: TruckEvent) => {
+        tours.push({
+          event: event,
+          operator: operators.find((operator: Operator) => operator.id === event.operatorId)
+        });
+      });
+    }
+
+    this.tours = tours;
   }
 }
