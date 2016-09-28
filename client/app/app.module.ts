@@ -8,7 +8,7 @@ import {StoreModule} from '@ngrx/store';
 import {appRoutingProviders, routing} from './app.routes';
 import {MainComponent} from './app.component';
 import {FoodTrucksModule} from './food-trucks/food-trucks.module';
-import {eventsReducer, operatorsReducer} from './food-trucks/reducers';
+import {locationsReducer, eventsReducer, operatorsReducer} from './food-trucks/reducers';
 import {WidgetsModule} from './widgets/widgets.module';
 import {CommonPagesModule} from './common-pages/common-pages.module';
 
@@ -18,6 +18,7 @@ import {CommonPagesModule} from './common-pages/common-pages.module';
     HttpModule,
     routing,
     StoreModule.provideStore({
+      locations: locationsReducer,
       events: eventsReducer,
       operators: operatorsReducer
     }),

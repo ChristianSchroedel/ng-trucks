@@ -13,8 +13,8 @@ import {LocationOverviewComponent} from './components/push/location-overview/loc
 import {LocationComponent} from './components/push/location/location.component';
 import {LocationViewComponent} from './components/location-view/location-view.component';
 import {RegionViewComponent} from './components/region-view/region-view.component';
-import {FoodTruckService} from './services/foodtruck.service';
-import {EventsActions, OperatorsActions} from './actions';
+import {FoodTruckService, LocationService} from './services';
+import {EventsActions, OperatorsActions, LocationsActions} from './actions';
 
 @NgModule({
   imports: [CommonModule, WidgetsModule, truckRouting],
@@ -30,8 +30,10 @@ import {EventsActions, OperatorsActions} from './actions';
   ],
   providers: [
     FoodTruckService,
+    LocationService,
     EventsActions,
-    OperatorsActions
+    OperatorsActions,
+    LocationsActions
   ]
 })
 export class FoodTrucksModule {

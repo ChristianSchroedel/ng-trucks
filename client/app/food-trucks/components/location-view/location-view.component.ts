@@ -12,7 +12,7 @@ import 'rxjs/add/observable/combineLatest';
 import {FoodTruckService} from '../../services/foodtruck.service';
 import {AppState} from '../../../app.state';
 import {EventsState} from '../../reducers';
-import {TruckEvents, TruckEvent, TruckTour, TruckLocation, locations, Operator} from '../../types';
+import {TruckEvents, TruckEvent, TruckTour, TruckLocation, Operator} from '../../types';
 
 @Component({
   selector: 'location-view',
@@ -24,7 +24,7 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   private clickedOperator$: BehaviorSubject<Operator>;
 
-  private sub: Subscription;
+  private subs: Subscription[];
 
   constructor(private foodTruckService: FoodTruckService,
               private store: Store<AppState>,
@@ -36,38 +36,14 @@ export class LocationViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let combined: Observable<any> = Observable.combineLatest(
-      this.route.params,
-      this.store.select(appState => appState.events),
-      this.store.select(appState => appState.operators),
-      (params: any, eventsState: EventsState, operators: Operator[]) => {
-        return {params, eventsState, operators};
-      });
+    let paramsSub: Subscription = this.subscribeToParams();
+    let combinedSub: Subscription = this.subscribeToAppState();
 
-    this.sub = combined
-      .distinctUntilChanged()
-      .subscribe((combined: any) => {
-        let params: any = combined.params;
-        let eventsState: EventsState = combined.eventsState;
-        let operators: Operator[] = combined.operators;
-
-        let locationName = params.locationName;
-        let location: TruckLocation = locations.find((location: TruckLocation) => {
-          return location.name === locationName
-        });
-
-        if (!eventsState.loadedLocations.includes(locationName)) {
-          this.foodTruckService.loadTruckListForLocation(location);
-          return;
-        }
-
-        this.extractToursForLocation(eventsState.events, operators, locationName);
-        this.locationName = locationName;
-      });
+    this.subs = [paramsSub, combinedSub];
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subs.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
   goToLocation(location: TruckLocation) {
@@ -75,7 +51,41 @@ export class LocationViewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/location', location.name]);
   }
 
-  private extractToursForLocation(loadedTruckEvents: TruckEvents[],
+  private subscribeToParams(): Subscription {
+    return this.route.params.subscribe((params: any) => {
+      this.locationName = params.locationName;
+    });
+  }
+
+  private subscribeToAppState(): Subscription {
+    let stateObs: Observable<any> = Observable.combineLatest(
+      this.store.select(appState => appState.events),
+      this.store.select(appState => appState.operators),
+      this.store.select(appState => appState.locations)
+        .map((locations: TruckLocation[]) => locations.find((location: TruckLocation) => {
+          return location.name === this.locationName
+        })),
+      (eventsState: EventsState, operators: Operator[], location: TruckLocation) => {
+        return {eventsState, operators, location};
+      });
+
+    return stateObs
+      .filter((combined: any) => combined.location)
+      .subscribe((combined: any) => {
+        let eventsState: EventsState = combined.eventsState;
+        let operators: Operator[] = combined.operators;
+        let location: TruckLocation = combined.location;
+
+        if (!eventsState.loadedLocations.includes(location.name)) {
+          this.foodTruckService.loadTruckListForLocation(location);
+          return;
+        }
+
+        this.extractToursForLocation(eventsState.events, operators, location.name);
+      });
+  }
+
+  private extractToursForLocation(loadedTruckEvents:TruckEvents[],
                                   operators: Operator[],
                                   locationName: string) {
     let tours: TruckTour[] = [];

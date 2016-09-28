@@ -4,3 +4,4 @@
 
 export * from './events.reducer';
 export * from './operators.reducer';
+export * from './locations.reducer';

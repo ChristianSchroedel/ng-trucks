@@ -1,7 +1,8 @@
 /**
  * Created by developer on 24.08.2016.
  */
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {LocationService} from './food-trucks/services';
 
 @Component({
   selector: 'app',
@@ -9,5 +10,11 @@ import {Component, ViewEncapsulation} from '@angular/core';
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
+  constructor(private locationService: LocationService) {
+  }
+
+  ngOnInit() {
+    this.locationService.loadLocations();
+  }
 }

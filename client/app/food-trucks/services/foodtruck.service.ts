@@ -54,7 +54,8 @@ export class FoodTruckService {
 
     this.http.post(FOODTRUCK_API_URL, JSON.stringify(requestBody), this.requestOptions)
       .map((res: Response) => res.json())
-      .map((truckList: TruckList) => {
+      .take(1)
+      .subscribe((truckList: TruckList) => {
         let tours: Tour[] = Object.keys(truckList.tours).map((key) => truckList.tours[key]);
         let operators: Operator[] = Object.keys(truckList.operators).map((key) => truckList.operators[key]);
 
@@ -70,6 +71,6 @@ export class FoodTruckService {
         operators.forEach((operator: Operator) => {
           this.store.dispatch(this.operatorActions.addLocation(operator.id, location))
         });
-      }).take(1).subscribe();
+      });
   }
 }

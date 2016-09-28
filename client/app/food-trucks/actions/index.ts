@@ -4,3 +4,4 @@
 
 export * from './events';
 export * from './operators';
+export * from './locations';
