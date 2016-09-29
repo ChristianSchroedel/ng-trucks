@@ -32,11 +32,20 @@ export class LocationService {
   }
 
   loadLocationsForRegion(region: string) {
-    this.http.get(`${LOCATION_API_URL}/${region}`)
+    this.http.get(`${LOCATION_API_URL}?region=${region}`)
       .take(1)
       .map((res: Response) => res.json().data)
       .subscribe((locations: TruckLocation[]) => {
         this.store.dispatch(this.locationsAction.loadLocationsDone(locations));
+      });
+  }
+
+  loadLocation(locationName: string) {
+    this.http.get(`${LOCATION_API_URL}/${locationName}`)
+      .take(1)
+      .map((res: Response) => res.json().data)
+      .subscribe((location: TruckLocation) => {
+        this.store.dispatch(this.locationsAction.loadLocationsDone([location]));
       });
   }
 }

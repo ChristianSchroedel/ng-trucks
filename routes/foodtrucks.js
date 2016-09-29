@@ -9,7 +9,7 @@ var request = require('request');
 var FOOD_TRUCKS_API_URL = 'https://www.food-trucks-deutschland.de/api/locations/getTours.json';
 
 router.route('/')
-  .post(function(req, res) {
+  .post(function (req, res) {
     var body = req.body;
 
     var date = body.date || 'today';
