@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/combineLatest';
-import {FoodTruckService} from '../../services/foodtruck.service';
+import {FoodTruckService, LocationService} from '../../services';
 import {AppState} from '../../../app.state';
 import {EventsState} from '../../reducers';
 import {TruckEvents, TruckEvent, TruckTour, TruckLocation, Operator} from '../../types';
@@ -27,6 +27,7 @@ export class LocationViewComponent implements OnInit, OnDestroy {
   private subs: Subscription[];
 
   constructor(private foodTruckService: FoodTruckService,
+              private locationService: LocationService,
               private store: Store<AppState>,
               private router: Router,
               private route: ActivatedRoute,
@@ -53,7 +54,10 @@ export class LocationViewComponent implements OnInit, OnDestroy {
 
   private subscribeToParams(): Subscription {
     return this.route.params.subscribe((params: any) => {
-      this.locationName = params.locationName;
+      let locationName: string = params.locationName;
+
+      this.locationService.loadLocation(locationName);
+      this.locationName = locationName;
     });
   }
 

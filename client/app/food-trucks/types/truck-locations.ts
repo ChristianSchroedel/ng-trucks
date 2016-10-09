@@ -1,7 +1,7 @@
-import {Colors} from './utils';
 /**
  * Created by Christian Schrödel on 10.09.2016.
  */
+import {Colors} from './utils';
 
 export interface TruckLocation {
   name: string;
